@@ -1,0 +1,97 @@
+{
+	"info": {
+		"_postman_id": "2342cd40-c56b-4c0a-8107-45af0db86cc9",
+		"name": "Event API",
+		"description": "With the Event API, you can post an individual user event.\n\nYou need to set below environment variables to use this collection\n\n- `event_url` : Moloco's staff will provide accurate host information.\n    \n- `event_api_key` : Please review the [API Key ](https://mcm-docs.moloco.com/docs/api-and-sso-credential-management) guide for information on generating an API key\n    \n- `platform_id` : Moloco's staff will provide platform_id information.\n    \n\nAPI reference: [https://mcm-docs.moloco.com/reference/rmpeventapi_postuserevent](https://mcm-docs.moloco.com/reference/rmpeventapi_postuserevent)",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "37718059"
+	},
+	"item": [
+		{
+			"name": "PostUserEvent",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"event_type\": \"HOME\",\n  \"channel_type\": \"DESKTOP_SITE\",\n  \"device\": {\n    \"os\": \"ios\",\n    \"os_version\": \"15.1\",\n    \"persistent_id\": \"persistent_id\",\n    \"model\": \"iPhone 11 Pro\",\n    \"ua\": \"Mozilla/5.0 (iPhone; CPU iPhone OS 14_4_2 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/111FFF\",\n    \"language\": \"en\"\n  },\n  \"id\": \"{{request_id}}\",\n  \"timestamp\": \"1734589091000\",\n  \"domain\": \"/home\",\n  \"user_id\": \"test_user_id\",\n  \"page_id\": \"/home\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{event_url}}/rmp/event/v1/platforms/{{platform_id}}/userevents",
+					"host": [
+						"{{event_url}}"
+					],
+					"path": [
+						"rmp",
+						"event",
+						"v1",
+						"platforms",
+						"{{platform_id}}",
+						"userevents"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "apikey",
+		"apikey": [
+			{
+				"key": "value",
+				"value": "{{event_api_key}}",
+				"type": "string"
+			},
+			{
+				"key": "key",
+				"value": "x-api-key",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					"// Function to generate a UUID with a timestamp",
+					"function generateTimestampedUUID() {",
+					"    const timestamp = new Date().toISOString().replace(/[-:.TZ]/g, \"\"); // Generate timestamp (YYYYMMDDHHMMSS)",
+					"    const uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {",
+					"        const r = (Math.random() * 16) | 0;",
+					"        const v = c === 'x' ? r : (r & 0x3) | 0x8;",
+					"        return v.toString(16);",
+					"    });",
+					"    return `${timestamp}-${uuid}`; // Combine timestamp and UUID",
+					"}",
+					"",
+					"// Generate request_id and set it as an environment variable",
+					"const requestId = generateTimestampedUUID();",
+					"pm.environment.set(\"request_id\", requestId);",
+					"",
+					"// Log the generated request_id",
+					"console.log(\"Generated request_id with timestamp:\", requestId);",
+					"",
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
