@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "c37d41ce-f72b-4a06-828a-8ffec312f1c3",
+		"_postman_id": "b10ece8a-afe7-4290-ae91-e0506459a9a1",
 		"name": "Decision API",
 		"description": "With the Decision API, you can request/receive selected item/creative lists. You should call the decision API on the inventories you want to serve ads.\n\nYou need to set below environment variables to use this collection\n\n- `dcsn_url` : Moloco's staff will provide accurate host information.\n    \n- `dscn_api_key` : Please review the [API Key ](https://mcm-docs.moloco.com/docs/api-and-sso-credential-management) guide for information on generating an API key\n    \n- `platform_id` : Moloco's staff will provide platform_id information.\n    \n\nAPI reference: [https://mcm-docs.moloco.com/reference/rmpdecisionapi_decideaditems](https://mcm-docs.moloco.com/reference/rmpdecisionapi_decideaditems)",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
@@ -39,7 +39,7 @@
 			"response": []
 		},
 		{
-			"name": "DecideAdIBrands",
+			"name": "DecideAdBrands",
 			"request": {
 				"method": "POST",
 				"header": [],
