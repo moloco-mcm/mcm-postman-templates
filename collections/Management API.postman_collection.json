@@ -635,6 +635,198 @@
 					"response": []
 				},
 				{
+					"name": "ListCampaignReviews",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{mgmt_url}}/rmp/mgmt/v1/platforms/{{platform_id}}/ad-accounts/:ad_account_id/campaign-reviews?campaign_id=CQwQiA5YTw1R0pzI",
+							"host": [
+								"{{mgmt_url}}"
+							],
+							"path": [
+								"rmp",
+								"mgmt",
+								"v1",
+								"platforms",
+								"{{platform_id}}",
+								"ad-accounts",
+								":ad_account_id",
+								"campaign-reviews"
+							],
+							"query": [
+								{
+									"key": "brand_entity_type",
+									"value": "ALL",
+									"disabled": true
+								},
+								{
+									"key": "brand_entity_ids",
+									"value": null,
+									"disabled": true
+								},
+								{
+									"key": "campaign_id",
+									"value": "CQwQiA5YTw1R0pzI"
+								}
+							],
+							"variable": [
+								{
+									"key": "ad_account_id",
+									"value": "10019"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CreateCampaignReview",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"brand_entity_type\": \"ASSET\",\n  \"review_status\": \"APPROVED\",\n  \"campaign_id\": \"10019\",\n  \"brand_entity_id\": \"CQwQiA5YTw1R0pzI-1731964208-a-pywzgxjI\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{mgmt_url}}/rmp/mgmt/v1/platforms/{{platform_id}}/ad-accounts/:ad_account_id/campaign-reviews",
+							"host": [
+								"{{mgmt_url}}"
+							],
+							"path": [
+								"rmp",
+								"mgmt",
+								"v1",
+								"platforms",
+								"{{platform_id}}",
+								"ad-accounts",
+								":ad_account_id",
+								"campaign-reviews"
+							],
+							"variable": [
+								{
+									"key": "ad_account_id",
+									"value": "10019"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UpdateCampaignReviewsBulk",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"campaign_id\": \"CQwQiA5YTw1R0pzI\",\n  \"campaign_reviews\": [\n    {\n      \"brand_entity_type\": \"ASSET\",\n      \"review_status\": \"APPROVED\",\n      \"ad_account_id\": \"10019\",\n      \"brand_entity_id\": \"CQwQiA5YTw1R0pzI-1731964208-a-pywzgxjI\",\n      \"campaign_id\": \"CQwQiA5YTw1R0pzI\",\n      \"updated_at\": \"2024-11-18T21:10:08.366096Z\"\n    }\n  ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{mgmt_url}}/rmp/mgmt/v1/platforms/{{platform_id}}/ad-accounts/:ad_account_id/campaign-reviews-bulk",
+							"host": [
+								"{{mgmt_url}}"
+							],
+							"path": [
+								"rmp",
+								"mgmt",
+								"v1",
+								"platforms",
+								"{{platform_id}}",
+								"ad-accounts",
+								":ad_account_id",
+								"campaign-reviews-bulk"
+							],
+							"variable": [
+								{
+									"key": "ad_account_id",
+									"value": "10019"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UpdateCampaignReview",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"campaign_review\": {\n    \"brand_entity_type\": \"ASSET\",\n    \"review_status\": \"IN_REVIEW\",\n    \"updated_at\": \"2025-02-11T08:35:34.173085Z\",\n    \"campaign_id\": \"CQwQiA5YTw1R0pzI\",\n    \"ad_account_id\": \"10019\",\n    \"brand_entity_id\": \"CQwQiA5YTw1R0pzI-1731964208-a-pywzgxjI\"\n  },\n  \"campaign_id\": \"CQwQiA5YTw1R0pzI\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{mgmt_url}}/rmp/mgmt/v1/platforms/{{platform_id}}/ad-accounts/:ad_account_id/campaign-reviews/:brand_entity_id",
+							"host": [
+								"{{mgmt_url}}"
+							],
+							"path": [
+								"rmp",
+								"mgmt",
+								"v1",
+								"platforms",
+								"{{platform_id}}",
+								"ad-accounts",
+								":ad_account_id",
+								"campaign-reviews",
+								":brand_entity_id"
+							],
+							"variable": [
+								{
+									"key": "ad_account_id",
+									"value": "10019"
+								},
+								{
+									"key": "brand_entity_id",
+									"value": "CQwQiA5YTw1R0pzI-1731964208-a-pywzgxjI"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "CreateCampaign",
 					"request": {
 						"method": "POST",
@@ -1116,7 +1308,7 @@
 							"formdata": [
 								{
 									"key": "creative",
-									"value": "{\n  \"title\": \"test_title_jan09a\",\n  \"type\": \"IMAGE\",\n  \"image_source\": {\n    \"url\": \"https://rmp-cdn.moloco.com/platform-logo/moloco.jpg\",\n    \"size\": 40000,\n    \"width\": 566,\n    \"height\": 566,\n    \"file_name\": \"test_filename_jan09a\" \n  }\n}",
+									"value": "{\n  \"title\": \"test_title_jan09a\",\n  \"type\": \"IMAGE\",\n  \"image_source\": {\n    \"url\": \"https://rmp-cdn.moloco.com/platform-logo/moloco.jpg\",\n    \"file_name\": \"test_filename_feb10a\" \n  }\n}",
 									"type": "text"
 								}
 							]
@@ -1312,6 +1504,151 @@
 								"{{platform_id}}",
 								"creatives-bulk",
 								"read"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "ImageAsset",
+			"item": [
+				{
+					"name": "ListImageAssets",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{mgmt_url}}/rmp/mgmt/v1/platforms/{{platform_id}}/ad-accounts/:ad_account_id/image-assets?image_asset_type=BANNER",
+							"host": [
+								"{{mgmt_url}}"
+							],
+							"path": [
+								"rmp",
+								"mgmt",
+								"v1",
+								"platforms",
+								"{{platform_id}}",
+								"ad-accounts",
+								":ad_account_id",
+								"image-assets"
+							],
+							"query": [
+								{
+									"key": "image_asset_type",
+									"value": "BANNER"
+								},
+								{
+									"key": "ids",
+									"value": null,
+									"disabled": true
+								}
+							],
+							"variable": [
+								{
+									"key": "ad_account_id",
+									"value": "10017"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CreateImageAsset",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "image_asset",
+									"value": "{\n  \"title\": \"Banner Image\",\n  \"image_asset_type\": \"BANNER\"\n}",
+									"type": "text"
+								},
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/Users/dk.kim/Downloads/640x360.jpg"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{mgmt_url}}/rmp/mgmt/v1/platforms/{{platform_id}}/ad-accounts/:ad_account_id/image-assets",
+							"host": [
+								"{{mgmt_url}}"
+							],
+							"path": [
+								"rmp",
+								"mgmt",
+								"v1",
+								"platforms",
+								"{{platform_id}}",
+								"ad-accounts",
+								":ad_account_id",
+								"image-assets"
+							],
+							"query": [
+								{
+									"key": "image_asset_type",
+									"value": "LOGO",
+									"disabled": true
+								}
+							],
+							"variable": [
+								{
+									"key": "ad_account_id",
+									"value": "10017"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ReadImageAsset",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{mgmt_url}}/rmp/mgmt/v1/platforms/{{platform_id}}/ad-accounts/:ad_account_id/image_assets/:image_asset_id",
+							"host": [
+								"{{mgmt_url}}"
+							],
+							"path": [
+								"rmp",
+								"mgmt",
+								"v1",
+								"platforms",
+								"{{platform_id}}",
+								"ad-accounts",
+								":ad_account_id",
+								"image_assets",
+								":image_asset_id"
+							],
+							"variable": [
+								{
+									"key": "ad_account_id",
+									"value": "10017"
+								},
+								{
+									"key": "image_asset_id",
+									"value": ""
+								}
 							]
 						}
 					},
