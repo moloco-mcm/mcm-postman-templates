@@ -1,0 +1,7 @@
+# 기존 무시 항목들
+node_modules/
+.env
+.DS_Store
+
+# Postman collection 파일 무시
+collections/Management API.postman_collection.json
