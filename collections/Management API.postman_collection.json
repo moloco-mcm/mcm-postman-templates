@@ -157,16 +157,6 @@
 				{
 					"name": "UpdateAdAccountStateInfo",
 					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjQ4MTgwMDQ1NzksImlhdCI6MTY2NDQwNDU3OSwiaXNzIjoibW9yc2UiLCJ2ZXJzaW9uIjoidjIiLCJ1c2VyX2lkIjoiUlFKT1NYMkNPN2Y3ODF5RVNmRVoiLCJ1c2VyX2VtYWlsIjoibWdtdEBtb2xvY28uY29tIiwidXNlcl90eXBlIjoic2VydmVyIiwicGxhdGZvcm1faWQiOiJURVNUX01HTVRBUEkiLCJ1c2Vyc3BhY2VfaWQiOiJVU0VSU1BBQ0VfVEVTVF9NR01UQVBJIiwibmFtZSI6Im1nbXQifQ.zAqJY6l7tZcuVDc1K9qxoekaaBEzC26vBLX2j7KsKpE",
-									"type": "string"
-								}
-							]
-						},
 						"method": "PUT",
 						"header": [],
 						"body": {
