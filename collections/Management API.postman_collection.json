@@ -157,16 +157,6 @@
 				{
 					"name": "UpdateAdAccountStateInfo",
 					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "***REMOVED***",
-									"type": "string"
-								}
-							]
-						},
 						"method": "PUT",
 						"header": [],
 						"body": {
