@@ -1,10 +1,11 @@
 {
 	"info": {
-		"_postman_id": "b10ece8a-afe7-4290-ae91-e0506459a9a1",
+		"_postman_id": "63a06d23-f80a-434f-adc1-008e1e48563a",
 		"name": "Decision API",
 		"description": "With the Decision API, you can request/receive selected item/creative lists. You should call the decision API on the inventories you want to serve ads.\n\nYou need to set below environment variables to use this collection\n\n- `dcsn_url` : Moloco's staff will provide accurate host information.\n    \n- `dcsn_api_key` : Please review the [API Key ](https://mcm-docs.moloco.com/docs/api-and-sso-credential-management) guide for information on generating an API key\n    \n- `platform_id` : Moloco's staff will provide platform_id information.\n    \n\nAPI reference: [https://mcm-docs.moloco.com/reference/rmpdecisionapi_decideaditems](https://mcm-docs.moloco.com/reference/rmpdecisionapi_decideaditems)",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "37718059"
+		"_exporter_id": "37718059",
+		"_collection_link": "https://test-team-3647.postman.co/workspace/Postman-template---20250521~4b439383-bd3d-47a4-906e-86e975ff5f7b/collection/37718059-63a06d23-f80a-434f-adc1-008e1e48563a?action=share&source=collection_link&creator=37718059"
 	},
 	"item": [
 		{
@@ -70,13 +71,13 @@
 			"response": []
 		},
 		{
-			"name": "DecideAdCreative",
+			"name": "DecideAdDisplay",
 			"request": {
 				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n  \"user\": {\n    \"user_id\": \"user_id\"\n  },\n  \"device\": {\n    \"os\": \"ios\",\n    \"os_version\": \"15.1\",\n    \"persistent_id\": \"persistent_id\"\n  },\n  \"inventory\": {\n    \"inventory_id\": \"10001\",\n    \"num_items\": 10\n  },\n  \"filtering\": {\n    \"category\": {\n      \"operator\": \"OR\"\n    }\n  },\n  \"request_id\": \"{{request_id}}\",\n  \"page_id\": \"/home\"\n}",
+					"raw": "{\n  \"channel_type\": \"APP\",\n  \"user\": {\n    \"user_id\": \"user_id\"\n  },\n  \"device\": {\n    \"os\": \"ios\",\n    \"persistent_id\": \"persistent_id\"\n  },\n  \"filtering\": {\n    \"category\": {\n      \"operator\": \"OR\"\n    }\n  },\n  \"request_id\": \"{{request_id}}\",\n  \"domain\": \"example.com\",\n  \"custom_id\": \"custom_id\",\n  \"inventories\": [\n    {\n      \"inventory_id\": \"inventory_id\"\n    }\n  ],\n  \"page_id\": \"test_page\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -84,7 +85,7 @@
 					}
 				},
 				"url": {
-					"raw": "{{dcsn_url}}/rmp/decision/v1/platforms/{{platform_id}}/creative-auction",
+					"raw": "{{dcsn_url}}/rmp/decision/v1/platforms/{{platform_id}}/display-auction",
 					"host": [
 						"{{dcsn_url}}"
 					],
@@ -94,38 +95,7 @@
 						"v1",
 						"platforms",
 						"{{platform_id}}",
-						"creative-auction"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "DecideAdCreativesBulk",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n  \"user\": {\n    \"user_id\": \"user_id\"\n  },\n  \"device\": {\n    \"os\": \"ios\",\n    \"os_version\": \"15.1\",\n    \"persistent_id\": \"persistent_id\"\n  },\n  \"inventories\": [\n    {\n      \"inventory_id\": \"10001\"\n    },\n    {\n      \"inventory_id\": \"10002\",\n      \"search_query\": \"search_query\"\n    }\n  ],\n  \"filtering\": {\n    \"category\": {\n      \"operator\": \"OR\"\n    }\n  },\n  \"request_id\": \"{{request_id}}\",\n  \"page_id\": \"/home\"\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{dcsn_url}}/rmp/decision/v1/platforms/{{platform_id}}/creative-auction-bulk",
-					"host": [
-						"{{dcsn_url}}"
-					],
-					"path": [
-						"rmp",
-						"decision",
-						"v1",
-						"platforms",
-						"{{platform_id}}",
-						"creative-auction-bulk"
+						"display-auction"
 					]
 				}
 			},
