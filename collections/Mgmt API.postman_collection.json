@@ -1,10 +1,11 @@
 {
 	"info": {
-		"_postman_id": "38d6a556-c87d-43a1-9c8a-77e78bcbfa34",
+		"_postman_id": "c45afe6c-c81e-4730-97fb-15552143a181",
 		"name": "Management API",
 		"description": "If you have UI/UX requirements specific to your business/application domain, you can build a custom campaign manager application on top of Moloco’s Management API. The management API allows you to perform ad campaign-related operations such as creating/updating ad campaigns and pulling report data.\n\nYou need to set below environment variables to use this collection\n\n- `mgmt_url` : Moloco's staff will provide accurate host information.\n    \n- `mgmt_api_key` : Please review the [API Key ](https://mcm-docs.moloco.com/docs/api-and-sso-credential-management) guide for information on generating an API key\n    \n- `platform_id` : Moloco's staff will provide platform_id information.\n    \n\nAPI reference: [https://mcm-docs.moloco.com/reference/rmpmanagementapi_listadaccounts](https://mcm-docs.moloco.com/reference/rmpmanagementapi_listadaccounts)",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "37718059"
+		"_exporter_id": "37718059",
+		"_collection_link": "https://test-team-3647.postman.co/workspace/Postman-template---20250521~4b439383-bd3d-47a4-906e-86e975ff5f7b/collection/37718059-c45afe6c-c81e-4730-97fb-15552143a181?action=share&source=collection_link&creator=37718059"
 	},
 	"item": [
 		{
@@ -1209,299 +1210,6 @@
 			]
 		},
 		{
-			"name": "Creative",
-			"item": [
-				{
-					"name": "ReadCreativeOverview",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"method": "GET",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{mgmt_url}}/rmp/mgmt/v1/platforms/{{platform_id}}/ad-accounts/:ad_account_id/creative-overviews/:creative_id",
-							"host": [
-								"{{mgmt_url}}"
-							],
-							"path": [
-								"rmp",
-								"mgmt",
-								"v1",
-								"platforms",
-								"{{platform_id}}",
-								"ad-accounts",
-								":ad_account_id",
-								"creative-overviews",
-								":creative_id"
-							],
-							"variable": [
-								{
-									"key": "ad_account_id",
-									"value": "10017"
-								},
-								{
-									"key": "creative_id",
-									"value": "K5zzJWFuNkHACEPM"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "ListCreatives",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{mgmt_url}}/rmp/mgmt/v1/platforms/{{platform_id}}/ad-accounts/:ad_account_id/creatives",
-							"host": [
-								"{{mgmt_url}}"
-							],
-							"path": [
-								"rmp",
-								"mgmt",
-								"v1",
-								"platforms",
-								"{{platform_id}}",
-								"ad-accounts",
-								":ad_account_id",
-								"creatives"
-							],
-							"variable": [
-								{
-									"key": "ad_account_id",
-									"value": "10017"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "CreateCreative",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "formdata",
-							"formdata": [
-								{
-									"key": "creative",
-									"value": "{\n  \"title\": \"test_title_jan09a\",\n  \"type\": \"IMAGE\",\n  \"image_source\": {\n    \"url\": \"https://rmp-cdn.moloco.com/platform-logo/moloco.jpg\",\n    \"file_name\": \"test_filename_feb10a\" \n  }\n}",
-									"type": "text"
-								}
-							]
-						},
-						"url": {
-							"raw": "{{mgmt_url}}/rmp/mgmt/v1/platforms/{{platform_id}}/ad-accounts/:ad_account_id/creatives",
-							"host": [
-								"{{mgmt_url}}"
-							],
-							"path": [
-								"rmp",
-								"mgmt",
-								"v1",
-								"platforms",
-								"{{platform_id}}",
-								"ad-accounts",
-								":ad_account_id",
-								"creatives"
-							],
-							"variable": [
-								{
-									"key": "ad_account_id",
-									"value": "10017"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "ReadCreative",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{mgmt_url}}/rmp/mgmt/v1/platforms/{{platform_id}}/ad-accounts/:ad_account_id/creatives/:creative_id",
-							"host": [
-								"{{mgmt_url}}"
-							],
-							"path": [
-								"rmp",
-								"mgmt",
-								"v1",
-								"platforms",
-								"{{platform_id}}",
-								"ad-accounts",
-								":ad_account_id",
-								"creatives",
-								":creative_id"
-							],
-							"variable": [
-								{
-									"key": "ad_account_id",
-									"value": "10017"
-								},
-								{
-									"key": "creative_id",
-									"value": "xUpWnMlmUdyFLzpp"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "UpdateCreative",
-					"request": {
-						"method": "PUT",
-						"header": [],
-						"body": {
-							"mode": "formdata",
-							"formdata": [
-								{
-									"key": "upload_creative_request",
-									"value": " {\n    \"creative\": {\n      \"title\": \"test_title_updated_for_jan9\",\n      \"type\": \"IMAGE\",\n      \"updated_at\": \"2025-01-09T08:19:19.590910Z\"\n    }\n  }\n",
-									"type": "text"
-								}
-							]
-						},
-						"url": {
-							"raw": "{{mgmt_url}}/rmp/mgmt/v1/platforms/{{platform_id}}/ad-accounts/:ad_account_id/creatives/:creative_id",
-							"host": [
-								"{{mgmt_url}}"
-							],
-							"path": [
-								"rmp",
-								"mgmt",
-								"v1",
-								"platforms",
-								"{{platform_id}}",
-								"ad-accounts",
-								":ad_account_id",
-								"creatives",
-								":creative_id"
-							],
-							"variable": [
-								{
-									"key": "ad_account_id",
-									"value": "10017"
-								},
-								{
-									"key": "creative_id",
-									"value": "XjYl5Fhf76zsM3bq"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "UpdateCreativeReviewStatus",
-					"request": {
-						"method": "PUT",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"review_status\": {\n    \"status\": \"IN_REVIEW\",\n    \"updated_at\": \"2025-01-09T08:19:19.590910Z\"\n  }\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{mgmt_url}}/rmp/mgmt/v1/platforms/{{platform_id}}/ad-accounts/:ad_account_id/creatives/:creative_id/review-status",
-							"host": [
-								"{{mgmt_url}}"
-							],
-							"path": [
-								"rmp",
-								"mgmt",
-								"v1",
-								"platforms",
-								"{{platform_id}}",
-								"ad-accounts",
-								":ad_account_id",
-								"creatives",
-								":creative_id",
-								"review-status"
-							],
-							"variable": [
-								{
-									"key": "ad_account_id",
-									"value": "10017"
-								},
-								{
-									"key": "creative_id",
-									"value": "XjYl5Fhf76zsM3bq"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "QueryCreativeOverviews",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"url": {
-							"raw": "{{mgmt_url}}/rmp/mgmt/v1/platforms/{{platform_id}}/creative-overviews-bulk/read",
-							"host": [
-								"{{mgmt_url}}"
-							],
-							"path": [
-								"rmp",
-								"mgmt",
-								"v1",
-								"platforms",
-								"{{platform_id}}",
-								"creative-overviews-bulk",
-								"read"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "QueryCreatives",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"url": {
-							"raw": "{{mgmt_url}}/rmp/mgmt/v1/platforms/{{platform_id}}/creatives-bulk/read",
-							"host": [
-								"{{mgmt_url}}"
-							],
-							"path": [
-								"rmp",
-								"mgmt",
-								"v1",
-								"platforms",
-								"{{platform_id}}",
-								"creatives-bulk",
-								"read"
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
 			"name": "ImageAsset",
 			"item": [
 				{
@@ -1784,6 +1492,168 @@
 								"platforms",
 								"{{platform_id}}",
 								"spending-limits-bulk",
+								"read"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ListCredits",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{mgmt_url}}/rmp/mgmt/v1/platforms/{{platform_id}}/ad-accounts/:ad_account_id/credits",
+							"host": [
+								"{{mgmt_url}}"
+							],
+							"path": [
+								"rmp",
+								"mgmt",
+								"v1",
+								"platforms",
+								"{{platform_id}}",
+								"ad-accounts",
+								":ad_account_id",
+								"credits"
+							],
+							"variable": [
+								{
+									"key": "ad_account_id",
+									"value": "test_account1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "TopUpCredits",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"top_up\": {\n    \"currency\": \"KRW\",\n    \"amount_micro\": \"1000000000\"\n  },\n  \"comment\": \"test_top_up\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{mgmt_url}}/rmp/mgmt/v1/platforms/{{platform_id}}/ad-accounts/:ad_account_id/credits/:credit_id/top-up/:request_id",
+							"host": [
+								"{{mgmt_url}}"
+							],
+							"path": [
+								"rmp",
+								"mgmt",
+								"v1",
+								"platforms",
+								"{{platform_id}}",
+								"ad-accounts",
+								":ad_account_id",
+								"credits",
+								":credit_id",
+								"top-up",
+								":request_id"
+							],
+							"variable": [
+								{
+									"key": "ad_account_id",
+									"value": "test_account1"
+								},
+								{
+									"key": "credit_id",
+									"value": "WhyNlozuxHd78mz2"
+								},
+								{
+									"key": "request_id",
+									"value": "{{request_id}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "WithdrawCredits",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"withdraw\": {\n    \"currency\": \"KRW\",\n    \"amount_micro\": \"1000000000\"\n  },\n  \"comment\": \"test_withdraw\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{mgmt_url}}/rmp/mgmt/v1/platforms/{{platform_id}}/ad-accounts/:ad_account_id/credits/:credit_id/withdraw/:request_id",
+							"host": [
+								"{{mgmt_url}}"
+							],
+							"path": [
+								"rmp",
+								"mgmt",
+								"v1",
+								"platforms",
+								"{{platform_id}}",
+								"ad-accounts",
+								":ad_account_id",
+								"credits",
+								":credit_id",
+								"withdraw",
+								":request_id"
+							],
+							"variable": [
+								{
+									"key": "ad_account_id",
+									"value": "test_account1"
+								},
+								{
+									"key": "credit_id",
+									"value": "WhyNlozuxHd78mz2"
+								},
+								{
+									"key": "request_id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "QueryCredits",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{mgmt_url}}/rmp/mgmt/v1/platforms/{{platform_id}}/credits-bulk/read",
+							"host": [
+								"{{mgmt_url}}"
+							],
+							"path": [
+								"rmp",
+								"mgmt",
+								"v1",
+								"platforms",
+								"{{platform_id}}",
+								"credits-bulk",
 								"read"
 							]
 						}
