@@ -1936,7 +1936,7 @@
 					"response": []
 				},
 				{
-					"name": "UpdateAdManagerAccount(WIP)",
+					"name": "UpdateAdManagerAccount",
 					"request": {
 						"method": "PUT",
 						"header": [
