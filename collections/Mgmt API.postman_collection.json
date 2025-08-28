@@ -1,11 +1,10 @@
 {
 	"info": {
-		"_postman_id": "c45afe6c-c81e-4730-97fb-15552143a181",
+		"_postman_id": "be68aa1e-ac9e-48c3-852f-ecd459e5ad8b",
 		"name": "Management API",
 		"description": "If you have UI/UX requirements specific to your business/application domain, you can build a custom campaign manager application on top of Moloco’s Management API. The management API allows you to perform ad campaign-related operations such as creating/updating ad campaigns and pulling report data.\n\nYou need to set below environment variables to use this collection\n\n- `mgmt_url` : Moloco's staff will provide accurate host information.\n    \n- `mgmt_api_key` : Please review the [API Key ](https://mcm-docs.moloco.com/docs/api-and-sso-credential-management) guide for information on generating an API key\n    \n- `platform_id` : Moloco's staff will provide platform_id information.\n    \n\nAPI reference: [https://mcm-docs.moloco.com/reference/rmpmanagementapi_listadaccounts](https://mcm-docs.moloco.com/reference/rmpmanagementapi_listadaccounts)",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "37718059",
-		"_collection_link": "https://test-team-3647.postman.co/workspace/Postman-template---20250521~4b439383-bd3d-47a4-906e-86e975ff5f7b/collection/37718059-c45afe6c-c81e-4730-97fb-15552143a181?action=share&source=collection_link&creator=37718059"
+		"_exporter_id": "37718059"
 	},
 	"item": [
 		{
@@ -104,7 +103,7 @@
 							"variable": [
 								{
 									"key": "ad_account_id",
-									"value": "A000111"
+									"value": "AD_ACCOUNT_ID"
 								}
 							]
 						}
@@ -148,7 +147,7 @@
 							"variable": [
 								{
 									"key": "ad_account_id",
-									"value": "10011"
+									"value": "AD_ACCOUNT_ID"
 								}
 							]
 						}
@@ -245,7 +244,7 @@
 							"variable": [
 								{
 									"key": "ad_account_id",
-									"value": "10012"
+									"value": "AD_ACCOUNT_ID"
 								}
 							]
 						}
@@ -284,7 +283,7 @@
 							"variable": [
 								{
 									"key": "ad_account_id",
-									"value": "10012"
+									"value": "AD_ACCOUNT_ID"
 								}
 							]
 						}
@@ -323,7 +322,7 @@
 							"variable": [
 								{
 									"key": "ad_account_id",
-									"value": "40003972"
+									"value": "AD_ACCOUNT_ID"
 								}
 							]
 						}
@@ -362,7 +361,7 @@
 							"variable": [
 								{
 									"key": "ad_manager_account_id",
-									"value": "gtedBLWbzXWNJX5v"
+									"value": "AMA_ID"
 								}
 							]
 						}
@@ -395,6 +394,45 @@
 								"platforms",
 								"{{platform_id}}",
 								"report"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "QueryKeywordSummary",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"date_start\": \"2025-08-01\",\n  \"date_end\": \"2025-08-02\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{mgmt_url}}/rmp/mgmt/v1/platforms/{{platform_id}}/ad-accounts/:ad_account_id/keyword-report",
+							"host": [
+								"{{mgmt_url}}"
+							],
+							"path": [
+								"rmp",
+								"mgmt",
+								"v1",
+								"platforms",
+								"{{platform_id}}",
+								"ad-accounts",
+								":ad_account_id",
+								"keyword-report"
+							],
+							"variable": [
+								{
+									"key": "ad_account_id",
+									"value": "AD_ACCOUNT_ID"
+								}
 							]
 						}
 					},
@@ -443,7 +481,7 @@
 							"variable": [
 								{
 									"key": "ad_account_id",
-									"value": "10011"
+									"value": "AD_ACCOUNT_ID"
 								}
 							]
 						}
@@ -505,7 +543,7 @@
 							"variable": [
 								{
 									"key": "ad_account_id",
-									"value": "40000700"
+									"value": "AD_ACCOUNT_ID"
 								}
 							]
 						}
@@ -550,7 +588,7 @@
 							"variable": [
 								{
 									"key": "ad_account_id",
-									"value": "10017"
+									"value": "AD_ACCOUNT_ID"
 								}
 							]
 						}
@@ -618,7 +656,7 @@
 							"variable": [
 								{
 									"key": "ad_account_id",
-									"value": "40000850"
+									"value": "AD_ACCOUNT_ID"
 								}
 							]
 						}
@@ -670,7 +708,7 @@
 							"variable": [
 								{
 									"key": "ad_account_id",
-									"value": "10019"
+									"value": "AD_ACCOUNT_ID"
 								}
 							]
 						}
@@ -715,7 +753,7 @@
 							"variable": [
 								{
 									"key": "ad_account_id",
-									"value": "10019"
+									"value": "AD_ACCOUNT_ID"
 								}
 							]
 						}
@@ -760,7 +798,7 @@
 							"variable": [
 								{
 									"key": "ad_account_id",
-									"value": "10019"
+									"value": "AD_ACCOUNT_ID"
 								}
 							]
 						}
@@ -806,11 +844,11 @@
 							"variable": [
 								{
 									"key": "ad_account_id",
-									"value": "10019"
+									"value": "AD_ACCOUNT_ID"
 								},
 								{
 									"key": "brand_entity_id",
-									"value": "CQwQiA5YTw1R0pzI-1731964208-a-pywzgxjI"
+									"value": "BRAND_ENTITY_ID"
 								}
 							]
 						}
@@ -855,7 +893,7 @@
 							"variable": [
 								{
 									"key": "ad_account_id",
-									"value": "10011"
+									"value": "AD_ACCOUNT_ID"
 								}
 							]
 						}
@@ -892,11 +930,11 @@
 							"variable": [
 								{
 									"key": "ad_account_id",
-									"value": "10011"
+									"value": "AD_ACCOUNT_ID"
 								},
 								{
 									"key": "campaign_id",
-									"value": "MYvtl4iCPVszYuEg"
+									"value": "CAMPAIGN_ID"
 								}
 							]
 						}
@@ -942,11 +980,11 @@
 							"variable": [
 								{
 									"key": "ad_account_id",
-									"value": "10011"
+									"value": "AD_ACCOUNT_ID"
 								},
 								{
 									"key": "campaign_id",
-									"value": "MYvtl4iCPVszYuEg"
+									"value": "CAMPIAGN_ID"
 								}
 							]
 						}
@@ -993,11 +1031,11 @@
 							"variable": [
 								{
 									"key": "ad_account_id",
-									"value": "10017"
+									"value": "AD_ACCOUNT_ID"
 								},
 								{
 									"key": "campaign_id",
-									"value": "RbSQ6AlUSu9wPE8Z"
+									"value": "CAMPAIGN_ID"
 								}
 							]
 						}
@@ -1200,151 +1238,6 @@
 							"variable": [
 								{
 									"key": "ad_manager_account_id",
-									"value": ""
-								}
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "ImageAsset",
-			"item": [
-				{
-					"name": "ListImageAssets",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"method": "GET",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{mgmt_url}}/rmp/mgmt/v1/platforms/{{platform_id}}/ad-accounts/:ad_account_id/image-assets?image_asset_type=BANNER",
-							"host": [
-								"{{mgmt_url}}"
-							],
-							"path": [
-								"rmp",
-								"mgmt",
-								"v1",
-								"platforms",
-								"{{platform_id}}",
-								"ad-accounts",
-								":ad_account_id",
-								"image-assets"
-							],
-							"query": [
-								{
-									"key": "image_asset_type",
-									"value": "BANNER"
-								},
-								{
-									"key": "ids",
-									"value": null,
-									"disabled": true
-								}
-							],
-							"variable": [
-								{
-									"key": "ad_account_id",
-									"value": "10017"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "CreateImageAsset",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "formdata",
-							"formdata": [
-								{
-									"key": "image_asset",
-									"value": "{\n  \"title\": \"Banner Image\",\n  \"image_asset_type\": \"BANNER\"\n}",
-									"type": "text"
-								},
-								{
-									"key": "file",
-									"type": "file",
-									"src": "/Users/dk.kim/Downloads/640x360.jpg"
-								}
-							]
-						},
-						"url": {
-							"raw": "{{mgmt_url}}/rmp/mgmt/v1/platforms/{{platform_id}}/ad-accounts/:ad_account_id/image-assets",
-							"host": [
-								"{{mgmt_url}}"
-							],
-							"path": [
-								"rmp",
-								"mgmt",
-								"v1",
-								"platforms",
-								"{{platform_id}}",
-								"ad-accounts",
-								":ad_account_id",
-								"image-assets"
-							],
-							"query": [
-								{
-									"key": "image_asset_type",
-									"value": "LOGO",
-									"disabled": true
-								}
-							],
-							"variable": [
-								{
-									"key": "ad_account_id",
-									"value": "10017"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "ReadImageAsset",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{mgmt_url}}/rmp/mgmt/v1/platforms/{{platform_id}}/ad-accounts/:ad_account_id/image_assets/:image_asset_id",
-							"host": [
-								"{{mgmt_url}}"
-							],
-							"path": [
-								"rmp",
-								"mgmt",
-								"v1",
-								"platforms",
-								"{{platform_id}}",
-								"ad-accounts",
-								":ad_account_id",
-								"image_assets",
-								":image_asset_id"
-							],
-							"variable": [
-								{
-									"key": "ad_account_id",
-									"value": "10017"
-								},
-								{
-									"key": "image_asset_id",
 									"value": ""
 								}
 							]
@@ -1688,7 +1581,7 @@
 							"variable": [
 								{
 									"key": "ad_account_id",
-									"value": "10010"
+									"value": "AD_ACCOUNT_ID"
 								}
 							]
 						}
@@ -1730,11 +1623,11 @@
 							"variable": [
 								{
 									"key": "ad_account_id",
-									"value": "10010"
+									"value": "AD_ACCOUNT_ID"
 								},
 								{
 									"key": "wallet_id",
-									"value": "xwSl4MWA4lDysaXE"
+									"value": "WALLET_ID"
 								}
 							]
 						}
@@ -1776,11 +1669,11 @@
 							"variable": [
 								{
 									"key": "ad_account_id",
-									"value": ""
+									"value": "AD_ACCOUNT_ID"
 								},
 								{
 									"key": "wallet_id",
-									"value": ""
+									"value": "WALLET_ID"
 								}
 							]
 						}
@@ -2036,6 +1929,241 @@
 					"response": []
 				}
 			]
+		},
+		{
+			"name": "ImageAsset",
+			"item": [
+				{
+					"name": "ListImageAssets",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{mgmt_url}}/rmp/mgmt/v1/platforms/{{platform_id}}/ad-accounts/:ad_account_id/image-assets?image_asset_type=BANNER",
+							"host": [
+								"{{mgmt_url}}"
+							],
+							"path": [
+								"rmp",
+								"mgmt",
+								"v1",
+								"platforms",
+								"{{platform_id}}",
+								"ad-accounts",
+								":ad_account_id",
+								"image-assets"
+							],
+							"query": [
+								{
+									"key": "image_asset_type",
+									"value": "BANNER"
+								},
+								{
+									"key": "ids",
+									"value": null,
+									"disabled": true
+								}
+							],
+							"variable": [
+								{
+									"key": "ad_account_id",
+									"value": "AD_ACCOUNT_ID"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CreateImageAsset",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "image_asset",
+									"value": "{\n  \"title\": \"Banner Image\",\n  \"image_asset_type\": \"BANNER\"\n}",
+									"type": "text"
+								},
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/Users/dk.kim/Downloads/640x360.jpg"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{mgmt_url}}/rmp/mgmt/v1/platforms/{{platform_id}}/ad-accounts/:ad_account_id/image-assets",
+							"host": [
+								"{{mgmt_url}}"
+							],
+							"path": [
+								"rmp",
+								"mgmt",
+								"v1",
+								"platforms",
+								"{{platform_id}}",
+								"ad-accounts",
+								":ad_account_id",
+								"image-assets"
+							],
+							"query": [
+								{
+									"key": "image_asset_type",
+									"value": "LOGO",
+									"disabled": true
+								}
+							],
+							"variable": [
+								{
+									"key": "ad_account_id",
+									"value": "AD_ACCOUNT_ID"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ReadImageAsset",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{mgmt_url}}/rmp/mgmt/v1/platforms/{{platform_id}}/ad-accounts/:ad_account_id/image_assets/:image_asset_id",
+							"host": [
+								"{{mgmt_url}}"
+							],
+							"path": [
+								"rmp",
+								"mgmt",
+								"v1",
+								"platforms",
+								"{{platform_id}}",
+								"ad-accounts",
+								":ad_account_id",
+								"image_assets",
+								":image_asset_id"
+							],
+							"variable": [
+								{
+									"key": "ad_account_id",
+									"value": "AD_ACCOUNT_ID"
+								},
+								{
+									"key": "image_asset_id",
+									"value": "ASSET_ID"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ListVideoAssets",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{mgmt_url}}/rmp/mgmt/v1/platforms/{{platform_id}}/ad-accounts/:ad_account_id/video-assets",
+							"host": [
+								"{{mgmt_url}}"
+							],
+							"path": [
+								"rmp",
+								"mgmt",
+								"v1",
+								"platforms",
+								"{{platform_id}}",
+								"ad-accounts",
+								":ad_account_id",
+								"video-assets"
+							],
+							"query": [
+								{
+									"key": "ids",
+									"value": null,
+									"disabled": true
+								}
+							],
+							"variable": [
+								{
+									"key": "ad_account_id",
+									"value": "AD_ACCOUNT_ID"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "UserDataDeletionRequest",
+			"item": [
+				{
+					"name": "CreateUserDataDeletionRequest",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"identifiers\": [\n    {\n      \"user_id\": \"user_id_1\"\n    },\n    {\n      \"user_id\": \"user_id_2\"\n    },\n    {\n      \"user_id\": \"user_id_3\"\n    }\n  ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{mgmt_url}}/rmp/mgmt/v1/platforms/{{platform_id}}/data-deletion-requests/user-events",
+							"host": [
+								"{{mgmt_url}}"
+							],
+							"path": [
+								"rmp",
+								"mgmt",
+								"v1",
+								"platforms",
+								"{{platform_id}}",
+								"data-deletion-requests",
+								"user-events"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "Requests for the User data deletion request. We process the request by deleting the user event data in the batch job."
 		}
 	],
 	"auth": {
