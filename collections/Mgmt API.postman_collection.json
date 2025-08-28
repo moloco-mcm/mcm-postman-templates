@@ -1931,7 +1931,7 @@
 			]
 		},
 		{
-			"name": "ImageAsset",
+			"name": "Asset",
 			"item": [
 				{
 					"name": "ListImageAssets",
