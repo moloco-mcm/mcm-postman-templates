@@ -1,7 +1,10 @@
-# 기존 무시 항목들
+# General ignore rules
 node_modules/
 .env
 .DS_Store
 
-# Postman collection 파일 무시
+# Postman collection files to ignore
 collections/Management API.postman_collection.json
+
+# Reference API definition files
+reference/
