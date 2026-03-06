@@ -22,7 +22,7 @@ You need to have Postman [app](https://www.postman.com/) installed on your syste
 > 📘 You need to prepare API urls provided by Moloco representative
 
 1. Go to Environment tab and Input your API url addresses on `dcsn_url, mgmt_url, event_url`  
-2. input your API keys on `mgmt_api_key, dscn_api_key, event_api_key`  
+2. input your API keys on `mgmt_api_key, dcsn_api_key, event_api_key`  
    1. If you don't have those keys, please generate them by referring to [guide](https://mcm-docs.moloco.com/docs/api-and-sso-credential-management)
 3. Input your Platform ID on `platform_id`
 4. Do not input anything for `request_id` . This will be automatically generated through pre-script when you fire any relevant API
