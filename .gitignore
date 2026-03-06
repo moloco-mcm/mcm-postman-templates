@@ -8,3 +8,7 @@ collections/Management API.postman_collection.json
 
 # Reference API definition files
 reference/
+
+# Claude Code files
+CLAUDE.md
+.claude/
