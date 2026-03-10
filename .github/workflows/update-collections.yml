@@ -1,0 +1,53 @@
+name: Update Postman Collections
+
+on:
+  schedule:
+    - cron: '0 0 * * 1'  # Every Monday at 00:00 UTC
+  workflow_dispatch:       # Allow manual trigger
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+
+    steps:
+      - name: Checkout collections repo
+        uses: actions/checkout@v4
+        with:
+          path: collections-repo
+
+      - name: Checkout tools repo
+        uses: actions/checkout@v4
+        with:
+          repository: moloco-mcm/mcm-postman-sync-tool
+          token: ${{ secrets.TOOLS_REPO_TOKEN }}
+          path: tools-repo
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Update Postman collections from latest API specs
+        env:
+          README_API_KEY: ${{ secrets.README_API_KEY }}
+          COLLECTIONS_REPO: ${{ github.workspace }}/collections-repo
+        run: python tools-repo/update_collections.py
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v7
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          path: collections-repo
+          commit-message: "chore: auto-update Postman collections from latest API specs"
+          branch: auto/update-collections
+          delete-branch: true
+          title: "chore: auto-update Postman collections"
+          body: |
+            ## Auto-update
+
+            Weekly automated update of Postman collection request bodies
+            from the latest OpenAPI specs on README.com.
+
+            > Triggered by [update-collections workflow](../actions/workflows/update-collections.yml)
