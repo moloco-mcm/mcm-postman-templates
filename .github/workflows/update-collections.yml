@@ -36,6 +36,7 @@ jobs:
         run: python tools-repo/update_collections.py
 
       - name: Create Pull Request
+        id: create-pr
         uses: peter-evans/create-pull-request@v7
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
@@ -51,3 +52,11 @@ jobs:
             from the latest OpenAPI specs on README.com.
 
             > Triggered by [update-collections workflow](../actions/workflows/update-collections.yml)
+
+      - name: Report result
+        run: |
+          if [ "${{ steps.create-pr.outputs.pull-request-operation }}" = "none" ] || [ -z "${{ steps.create-pr.outputs.pull-request-url }}" ]; then
+            echo "✅ Collections are already up to date. No changes detected."
+          else
+            echo "✅ PR created: ${{ steps.create-pr.outputs.pull-request-url }}"
+          fi
