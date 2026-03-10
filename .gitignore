@@ -9,9 +9,6 @@ collections/Management API.postman_collection.json
 # Reference API definition files
 reference/
 
-# Local tools (personal use only)
-tools/
-
 # Claude Code files
 CLAUDE.md
 .claude/

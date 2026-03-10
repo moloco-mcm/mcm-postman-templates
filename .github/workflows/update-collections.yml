@@ -4,6 +4,11 @@ on:
   schedule:
     - cron: '0 0 * * 1'  # Every Monday at 00:00 UTC
   workflow_dispatch:       # Allow manual trigger
+    inputs:
+      test:
+        description: 'Run in test mode (uses local fixtures, no PR created)'
+        type: boolean
+        default: false
 
 jobs:
   update:
@@ -33,9 +38,10 @@ jobs:
         env:
           README_API_KEY: ${{ secrets.README_API_KEY }}
           COLLECTIONS_REPO: ${{ github.workspace }}/collections-repo
-        run: python tools-repo/update_collections.py
+        run: python tools-repo/update_collections.py ${{ inputs.test && '--test' || '' }}
 
       - name: Create Pull Request
+        if: ${{ !inputs.test }}
         id: create-pr
         uses: peter-evans/create-pull-request@v7
         with:
@@ -55,7 +61,9 @@ jobs:
 
       - name: Report result
         run: |
-          if [ "${{ steps.create-pr.outputs.pull-request-operation }}" = "none" ] || [ -z "${{ steps.create-pr.outputs.pull-request-url }}" ]; then
+          if ${{ inputs.test }}; then
+            echo "✅ Test mode complete. No PR created."
+          elif [ "${{ steps.create-pr.outputs.pull-request-operation }}" = "none" ] || [ -z "${{ steps.create-pr.outputs.pull-request-url }}" ]; then
             echo "✅ Collections are already up to date. No changes detected."
           else
             echo "✅ PR created: ${{ steps.create-pr.outputs.pull-request-url }}"
