@@ -6,7 +6,7 @@ on:
   workflow_dispatch:       # Allow manual trigger
     inputs:
       test:
-        description: 'Run in test mode (uses local fixtures, no PR created)'
+        description: 'Run in test mode (uses local fixtures)'
         type: boolean
         default: false
 
@@ -40,6 +40,19 @@ jobs:
           COLLECTIONS_REPO: ${{ github.workspace }}/collections-repo
         run: python tools-repo/update_collections.py ${{ inputs.test && '--test' || '' }}
 
+      - name: Set PR metadata
+        id: pr-meta
+        run: |
+          if [ "${{ inputs.test }}" = "true" ]; then
+            echo "branch=test/update-collections" >> $GITHUB_OUTPUT
+            echo "title=[TEST] chore: auto-update Postman collections" >> $GITHUB_OUTPUT
+            echo "body=⚠️ TEST RUN — do not merge\n\nThis PR was created in test mode using local fixtures." >> $GITHUB_OUTPUT
+          else
+            echo "branch=auto/update-collections" >> $GITHUB_OUTPUT
+            echo "title=chore: auto-update Postman collections" >> $GITHUB_OUTPUT
+            echo "body=Weekly automated update of Postman collection request bodies from the latest OpenAPI specs on README.com." >> $GITHUB_OUTPUT
+          fi
+
       - name: Create Pull Request
         id: create-pr
         uses: peter-evans/create-pull-request@v7
@@ -47,15 +60,10 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           path: collections-repo
           commit-message: "chore: auto-update Postman collections from latest API specs"
-          branch: ${{ inputs.test && 'test/update-collections' || 'auto/update-collections' }}
+          branch: ${{ steps.pr-meta.outputs.branch }}
           delete-branch: true
-          title: ${{ inputs.test && '[TEST] chore: auto-update Postman collections' || 'chore: auto-update Postman collections' }}
-          body: |
-            ## ${{ inputs.test && '⚠️ TEST RUN — do not merge' || 'Auto-update' }}
-
-            ${{ inputs.test && 'This PR was created in **test mode** using local fixtures. It is for verification only.' || 'Weekly automated update of Postman collection request bodies from the latest OpenAPI specs on README.com.' }}
-
-            > Triggered by [update-collections workflow](../actions/workflows/update-collections.yml)
+          title: ${{ steps.pr-meta.outputs.title }}
+          body: ${{ steps.pr-meta.outputs.body }}
 
       - name: Report result
         run: |
@@ -64,4 +72,3 @@ jobs:
           else
             echo "✅ PR created: ${{ steps.create-pr.outputs.pull-request-url }}"
           fi
-
