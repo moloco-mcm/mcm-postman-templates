@@ -41,30 +41,27 @@ jobs:
         run: python tools-repo/update_collections.py ${{ inputs.test && '--test' || '' }}
 
       - name: Create Pull Request
-        if: ${{ !inputs.test }}
         id: create-pr
         uses: peter-evans/create-pull-request@v7
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           path: collections-repo
           commit-message: "chore: auto-update Postman collections from latest API specs"
-          branch: auto/update-collections
+          branch: ${{ inputs.test && 'test/update-collections' || 'auto/update-collections' }}
           delete-branch: true
-          title: "chore: auto-update Postman collections"
+          title: ${{ inputs.test && '[TEST] chore: auto-update Postman collections' || 'chore: auto-update Postman collections' }}
           body: |
-            ## Auto-update
+            ## ${{ inputs.test && '⚠️ TEST RUN — do not merge' || 'Auto-update' }}
 
-            Weekly automated update of Postman collection request bodies
-            from the latest OpenAPI specs on README.com.
+            ${{ inputs.test && 'This PR was created in **test mode** using local fixtures. It is for verification only.' || 'Weekly automated update of Postman collection request bodies from the latest OpenAPI specs on README.com.' }}
 
             > Triggered by [update-collections workflow](../actions/workflows/update-collections.yml)
 
       - name: Report result
         run: |
-          if ${{ inputs.test }}; then
-            echo "✅ Test mode complete. No PR created."
-          elif [ "${{ steps.create-pr.outputs.pull-request-operation }}" = "none" ] || [ -z "${{ steps.create-pr.outputs.pull-request-url }}" ]; then
+          if [ "${{ steps.create-pr.outputs.pull-request-operation }}" = "none" ] || [ -z "${{ steps.create-pr.outputs.pull-request-url }}" ]; then
             echo "✅ Collections are already up to date. No changes detected."
           else
             echo "✅ PR created: ${{ steps.create-pr.outputs.pull-request-url }}"
           fi
+
