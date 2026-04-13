@@ -69,6 +69,11 @@ jobs:
         run: |
           if [ "${{ steps.create-pr.outputs.pull-request-operation }}" = "none" ] || [ -z "${{ steps.create-pr.outputs.pull-request-url }}" ]; then
             echo "✅ Collections are already up to date. No changes detected."
+            echo "## ✅ No Changes Detected" >> $GITHUB_STEP_SUMMARY
+            echo "Collections are already up to date. No PR was created." >> $GITHUB_STEP_SUMMARY
           else
-            echo "✅ PR created: ${{ steps.create-pr.outputs.pull-request-url }}"
+            echo "✅ PR ${{ steps.create-pr.outputs.pull-request-operation }}: ${{ steps.create-pr.outputs.pull-request-url }}"
+            echo "## 🔀 PR ${{ steps.create-pr.outputs.pull-request-operation }}" >> $GITHUB_STEP_SUMMARY
+            echo "**PR:** ${{ steps.create-pr.outputs.pull-request-url }}" >> $GITHUB_STEP_SUMMARY
+            echo "**Number:** #${{ steps.create-pr.outputs.pull-request-number }}" >> $GITHUB_STEP_SUMMARY
           fi
