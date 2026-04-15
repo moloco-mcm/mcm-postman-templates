@@ -99,6 +99,48 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "Decision",
+			"item": [
+				{
+					"name": "DecideAdReservedDisplay",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{dcsn_url}}/rmp/decision/v1/platforms/{{platform_id}}/reserved-display-ads",
+							"host": [
+								"{{dcsn_url}}"
+							],
+							"path": [
+								"rmp",
+								"decision",
+								"v1",
+								"platforms",
+								"{{platform_id}}",
+								"reserved-display-ads"
+							]
+						},
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"request_id\": \"REQUEST_ID\",  // Unique identifier of the request. The client is responsible to create this value.\n  \"user\": {  // User who gets recommended products or product ads.\n    \"user_id\": \"USER_ID\",  // User identifier used by the platform. This should typically be the sign-in ID used within the platform, and is highly recommended to be hashed prior to being sent to Moloco. Please provide this value whenever available to achieve optimal performance. If the value is unknown for any reason, please leave empty and do not fill in a default or random value.\n    \"interests\": [  // Interests of the user. e.g. ['sports', 'outdoor']\n      \"INTEREST\"\n    ]\n  },\n  \"device\": {\n    \"os\": \"OS\",  // OS of the device. For app traffic, 'ios', 'android' should be provided. When `advertising_id` is provided, this field also should be specified.\n    \"os_version\": \"OS_VERSION\",  // OS version which is taken from the device without manipulation or normalization. (e.g., '14.4.1')\n    \"model\": \"MODEL\",  // Device model, which is taken from the device without manipulation or normalization. (e.g., 'iPhone 11 Pro')\n    \"persistent_id\": \"PERSISTENT_ID\"  // Alternative ID to track users regardless of sign-in status. This can typically be an ID associated with the device that the user is on, and is highly recommended to be hashed prior to being sent to Moloco. Please provide this value in addition to the user.user_id whenever available to achieve optimal performance. If the value is unknown for any reason, please leave empty and do not fill in a default or random value. For further information, please refer to this guide: https://mcm-docs.moloco.com/docs/generating-persistent-identifiers\n  },\n  \"custom_id\": \"CUSTOM_ID\",  // Alternative ID to track users regardless of sign-in status or device. This ID should be provided as a third option following the user.user_id and device.persistent_id, and is highly recommended to be hashed prior to being sent to Moloco. This ID must be provided if both the user.user_id and device.persistent_id fields are left empty. Please do not fill in a default value, and instead randomize it if you must, but we recommend you send some ID that can be used to track users even if for a short time span. Please reach out to Moloco if you have further questions about this ID.\n  \"inventories\": [\n    {  // Inventory where reserved display ads will be displayed.\n      \"inventory_id\": \"INVENTORY_ID\",  // A unique identifier for the inventory that the platform manage. It is used for ad decision, analytics, reporting, ad decision etc. An inventory represents a place (a mobile screen, a web page, etc.) where your ads will be displayed. Common inventories in retail marketplaces include Home, Product detail page (PDP), Search Result Page (SRP), Category page, Checkout page.\n      \"targeting\": {  // This field is used to target specific ads based on a variety of criteria. NOTE: The filtering object is only allowed for ReservedDisplay.\n        \"key_values\": [  // A list of custom targeting keys and corresponding values.\n          {  // Key value sets for the ad request\n            \"key_id\": \"KEY_ID\",  // Key ID for the request\n            \"value_ids\": [  // Value IDs for the key\n              \"VALUE_ID\"\n            ]\n          }\n        ]\n      }\n    }\n  ],\n  \"channel_type\": \"CHANNEL_TYPE\",  // ChannelType enumerates available channel types. Simply using APP and SITE is fine, but you can also further distinguish DESKTOP_SITE and MOBILE_SITE for web users.\n  \"domain\": \"DOMAIN\",  // Set domain to a value that can identify the domain portion of your website's URL. We recommend you keep the same value across your website and application if they share your backend.\n  \"page_id\": \"PAGE_ID\"  // ID of the page where the ads will be displayed. It is a mandatory field if the Ad Placement (Inventory) is configured to use the PAGE_VIEW event type. \n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						}
+					},
+					"response": []
+				}
+			]
 		}
 	],
 	"auth": {

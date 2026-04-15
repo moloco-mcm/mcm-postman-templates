@@ -601,6 +601,45 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "ReadItemBasedCampaignGuidance",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{mgmt_url}}/rmp/mgmt/v1/platforms/{{platform_id}}/ad-accounts/:ad_account_id/item-based-campaign-guidances",
+							"host": [
+								"{{mgmt_url}}"
+							],
+							"path": [
+								"rmp",
+								"mgmt",
+								"v1",
+								"platforms",
+								"{{platform_id}}",
+								"ad-accounts",
+								":ad_account_id",
+								"item-based-campaign-guidances"
+							]
+						},
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"guidance_campaign\": {  // ReadItemBasedCampaignGuidanceRequest request.\n    \"campaign_id\": \"CAMPAIGN_ID\",  // Campaign id. It is required for an existing campaign.\n    \"ad_type\": \"AD_TYPE\",  // This message follows same field number with AdType [protocol/api/adcloud/rmp/common/common.proto].\n    \"goal_type\": \"GOAL_TYPE\",  // This message follows same field number with CampaignGoalType [protocol/api/adcloud/rmp/common/common.proto].\n    \"item_option\": {  // CampaignItemOption is used to specify the item list for campaign guidance.\n      \"include_all\": false,  // If true, include all items from the given AdAccountId regardless of what the ItemList contains.\n      \"item_list\": [  // Item list for campaign guidance. It's required when the IncludeAll is false.\n        \"ITEM_LIST\"\n      ],\n      \"excluded_item_list\": [  // When the IncludeAll is true, exclude the item from the list.\n        \"EXCLUDED_ITEM_LIST\"\n      ],\n      \"item_selection_type\": \"ITEM_SELECTION_TYPE\",  // Type of item selection for campaign. Choose MANUAL_SELECTION to select items manually or SMART_SELECTION to let Moloco choose items automatically.\n      \"smart_selection_setting\": {  // Configuration for Smart Selection filtering (e.g. brands, categories, on-sale, exclusions list).\n        \"include\": {  // Inclusion filters for Smart Selection.\n          \"brands\": [  // Brands to include.\n            \"BRAND\"\n          ],\n          \"categories\": [  // Category paths to include. Each path is a hierarchical list of levels.\n            {  // Hierarchical category path represented as ordered levels.\n              \"levels\": [  // Ordered category levels, e.g. ['Electronics', 'Phones', 'Smartphones'].\n              ]\n            }\n          ],\n          \"on_sale_only\": false  // When true, only on-sale items are included.\n        },\n        \"exclude\": {  // Exclusion filters for Smart Selection.\n          \"item_ids\": [  // Canonical catalog item IDs to exclude from the selection.\n            \"ITEM_ID\"\n          ]\n        }\n      }\n    }\n  }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						}
+					},
+					"response": []
 				}
 			],
 			"event": [
@@ -1293,6 +1332,47 @@
 									"value": "CREDIT_ID"
 								}
 							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "QueryWalletHistory",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{mgmt_url}}/rmp/mgmt/v1/platforms/{{platform_id}}/ad-accounts/:ad_account_id/wallets/:wallet_id/account-history",
+							"host": [
+								"{{mgmt_url}}"
+							],
+							"path": [
+								"rmp",
+								"mgmt",
+								"v1",
+								"platforms",
+								"{{platform_id}}",
+								"ad-accounts",
+								":ad_account_id",
+								"wallets",
+								":wallet_id",
+								"account-history"
+							]
+						},
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"start_time\": \"START_TIME\",  // Start time in RFC3339 format, e.g. '2017-04-01T12:34:56+00:00'\n  \"end_time\": \"END_TIME\",  // End time in RFC3339 format, e.g. '2017-05-01-T21:09:08+00:00'\n  \"page_index\": 0,  // Index of the page to be returned. Default: 1\n  \"page_size\": 0,  // Number of items to be returned on this page index. The maximum number is 5000. Default: 10\n  \"order_by\": {\n    \"column\": \"COLUMN\",\n    \"direction\": \"DIRECTION\"\n  }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
 						}
 					},
 					"response": []
@@ -2469,6 +2549,306 @@
 				}
 			],
 			"description": "Requests for the User data deletion request. We process the request by deleting the user event data in the batch job."
+		},
+		{
+			"name": "ReservedDisplay",
+			"item": [
+				{
+					"name": "UpsertOrderWithLineItems",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{mgmt_url}}/rmp/mgmt/v1/platforms/{{platform_id}}/ad-accounts/:ad_account_id/orders-with-line-items",
+							"host": [
+								"{{mgmt_url}}"
+							],
+							"path": [
+								"rmp",
+								"mgmt",
+								"v1",
+								"platforms",
+								"{{platform_id}}",
+								"ad-accounts",
+								":ad_account_id",
+								"orders-with-line-items"
+							]
+						},
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"order\": {  // List of params required to upsert an order.\n    \"id\": \"ID\",  // The id of the order. If present, the order will be updated; if absent, a new order will be created.\n    \"title\": \"TITLE\",  // A descriptive name of the order.\n    \"schedule\": {  // Campaign's interval with start and end timestamps in RFC3339 format.\n      \"start\": \"START\",  // Start time in RFC3339 format, e.g. '2017-04-01T12:34:56+00:00'\n      \"end\": \"END\"  // End time in RFC3339 format, e.g. '2017-05-01-T21:09:08+00:00'\n    },\n    \"budget\": {  // Budget describes the amount of budget to be consumed during the designated period.\n      \"period\": \"PERIOD\",\n      \"amount\": {  // A monetary amount in a specific currency; the unit is micro at fixed point value for accurate accumulation operation.\n        \"currency\": \"CURRENCY\",  // Currency enumerates available currencies.\n        \"amount_micro\": \"AMOUNT_MICRO\"  // Amount in micro unit. (e.g., 1234 means 0.001234)\n      }\n    },\n    \"insertion_order_url\": \"INSERTION_ORDER_URL\",  // URL of the insertion order.\n    \"updated_at\": \"UPDATED_AT\"  // Updated timestamp. Required when update request.\n  },\n  \"line_items\": [  // List of line item parameters for creation or update. Each line item with an id will be updated; those without an id will be created.\n    {  // List of params required to upsert a line item.\n      \"id\": \"ID\",  // The id of the line item. If present, the line item will be updated; if absent, a new line item will be created.\n      \"title\": \"TITLE\",  // A descriptive name of the line item.\n      \"inventory_id\": \"INVENTORY_ID\",  // The id of the inventory that this line item targets. Immutable.\n      \"schedule\": {  // Campaign's interval with start and end timestamps in RFC3339 format.\n        \"start\": \"START\",  // Start time in RFC3339 format, e.g. '2017-04-01T12:34:56+00:00'\n        \"end\": \"END\"  // End time in RFC3339 format, e.g. '2017-05-01-T21:09:08+00:00'\n      },\n      \"goal\": {\n        \"type\": \"TYPE\",\n        \"reserved_impressions\": {\n          \"target_cpm\": {  // A monetary amount in a specific currency; the unit is micro at fixed point value for accurate accumulation operation.\n            \"currency\": \"CURRENCY\",  // Currency enumerates available currencies.\n            \"amount_micro\": \"AMOUNT_MICRO\"  // Amount in micro unit. (e.g., 1234 means 0.001234)\n          },\n          \"target_impressions\": 0  // The reserved impressions amount.\n        }\n      },\n      \"enabling_state\": \"ENABLING_STATE\",  // campaign\u2019s enabling state that the advertiser can enable/disable. It will affect the campaign\u2019s state.\n      \"priority\": 0,  // Priority of the line item. The lower the number, the higher the priority. Valid values are 1-10.\n      \"assets\": [  // Assets associated with the line item. Between 1 and 10 assets are allowed.\n        {  // Detailed settings for the asset.\n          \"id\": \"ID\",  // The id of the asset. Must be left unset for the new asset. Must be set for the other requests.\n          \"banner\": {\n            \"creative_id\": \"CREATIVE_ID\",  // ImageAsset ID referred to set the banner image\n            \"target_inventory_dimension\": {\n              \"width\": 0,  // The width of the dimension. Required.\n              \"height\": 0  // The height of the dimension. Required.\n            },\n            \"image_url\": \"IMAGE_URL\",  // The banner image URL.\n            \"width\": 0,  // The banner width (pixel).\n            \"height\": 0,  // The banner height (pixel).\n            \"media_type\": \"MEDIA_TYPE\"\n          },\n          \"logo\": {\n            \"creative_id\": \"CREATIVE_ID\",  // ImageAsset ID referred to set the logo image.\n            \"image_url\": \"IMAGE_URL\"  // The logo image URL.\n          },\n          \"headline\": {\n            \"text\": \"TEXT\"  // Headline text\n          },\n          \"cta\": {\n            \"text\": \"TEXT\"  // Call-To-Action text\n          },\n          \"review_information\": {\n            \"status\": \"STATUS\",\n            \"rejection_reason\": \"REJECTION_REASON\",  // Review rejection reason\n            \"updated_at\": \"UPDATED_AT\"  // This field represents the last time the review was modified. The system sets this value internally for you when you create or update a review information, so make sure this value matches the latest updated_at you received from the Read API.\n          },\n          \"created_at\": \"CREATED_AT\",  // Created timestamp. API user should not touch this field; it is set internally.\n          \"updated_at\": \"UPDATED_AT\"  // This field represents the last time the asset was modified. The system sets this value internally for you when you create or update a asset, so make sure this value matches the latest updated_at you received from the Read API.\n        }\n      ],\n      \"landing_pages\": [  // Landing page associated with the line item. Only single landing page is allowed.\n        {  // Detailed settings for the landing page.\n          \"type\": \"TYPE\",\n          \"custom_url_setting\": {  // Detailed configuration of a custom url landing page.\n            \"url\": \"URL\"  // The url of the landing page.\n          },\n          \"product_detail_setting\": {  // Detailed configuration of the product detail page.\n            \"item_id\": \"ITEM_ID\"\n          },\n          \"product_list_setting\": {},  // Detailed configuration of the product list page.\n          \"id\": \"ID\",  // The id of the landing page. Must be left unset for the new landing page. Must be set for the other requests.\n          \"review_information\": {\n            \"status\": \"STATUS\",\n            \"rejection_reason\": \"REJECTION_REASON\",  // Review rejection reason\n            \"updated_at\": \"UPDATED_AT\"  // This field represents the last time the review was modified. The system sets this value internally for you when you create or update a review information, so make sure this value matches the latest updated_at you received from the Read API.\n          },\n          \"created_at\": \"CREATED_AT\",  // Created timestamp. API user should not touch this field; it is set internally.\n          \"updated_at\": \"UPDATED_AT\"  // This field represents the last time the landing page was modified. The system sets this value internally for you when you create or update a landing page, so make sure this value matches the latest updated_at you received from the Read API.\n        }\n      ],\n      \"updated_at\": \"UPDATED_AT\",  // Updated timestamp. Required when update request.\n      \"frequency_cappings\": [  // Frequency capping configuration to limit impressions per user.\n        {  // Configuration for frequency capping on a per-user-per-line item basis.\n          \"max_impressions\": 0,  // Maximum number of impressions per user. Must be greater than 0.\n          \"reset_period\": \"RESET_PERIOD\"\n        }\n      ],\n      \"ad_schedule\": {  // Ad scheduling settings for a campaign or line item.\n        \"dayparts\": [\n          {  // Timeframe of a specific day of the week.\n            \"day_of_week\": \"DAY_OF_WEEK\",  // DayOfWeek represents the day of the week.\n            \"start_time\": {  // Specific time of the day.\n              \"hours\": 0  // Hours of day in 24 hour format. Should be from 0 to 24. An API may choose\n            },\n            \"end_time\": {  // Specific time of the day.\n              \"hours\": 0  // Hours of day in 24 hour format. Should be from 0 to 24. An API may choose\n            }\n          }\n        ]\n      },\n      \"pacing\": {\n        \"type\": \"TYPE\"\n      },\n      \"targeting\": {  // Targeting describes the detailed targeting spec for the campaign.\n        \"placement_setting\": {  // PlacementSetting describes target placement targeting settings for the campaign\n          \"home_setting\": {  // Targeting setting of the Home Placement.\n            \"enabled\": false,  // If set true, the campaign will target the Home Placement.\n            \"cost_price\": {  // A monetary amount in a specific currency; the unit is micro at fixed point value for accurate accumulation operation.\n              \"currency\": \"CURRENCY\",  // Currency enumerates available currencies.\n              \"amount_micro\": \"AMOUNT_MICRO\"  // Amount in micro unit. (e.g., 1234 means 0.001234)\n            }\n          },\n          \"category_setting\": {  // Targeting setting of the Category Placement.\n            \"enabled\": false,  // If set true, the campaign will target the Category Placement.\n            \"cost_price\": {  // A monetary amount in a specific currency; the unit is micro at fixed point value for accurate accumulation operation.\n              \"currency\": \"CURRENCY\",  // Currency enumerates available currencies.\n              \"amount_micro\": \"AMOUNT_MICRO\"  // Amount in micro unit. (e.g., 1234 means 0.001234)\n            }\n          },\n          \"search_setting\": {  // Targeting setting of the Search Placement.\n            \"enabled\": false,  // If set true, the campaign will target the Search Placement.\n            \"cost_price\": {  // A monetary amount in a specific currency; the unit is micro at fixed point value for accurate accumulation operation.\n              \"currency\": \"CURRENCY\",  // Currency enumerates available currencies.\n              \"amount_micro\": \"AMOUNT_MICRO\"  // Amount in micro unit. (e.g., 1234 means 0.001234)\n            },\n            \"keyword_setting\": {  // KeywordSetting describes target keyword targeting settings for the campaign\n              \"keyword_type\": \"KEYWORD_TYPE\",  // KeywordType enumerates available keyword types for keyword targeting.\n              \"negative_keywords\": [  // Negative keyword settings.\n              ],\n              \"positive_keywords\": [  // Positive keyword settings.\n              ]\n            }\n          },\n          \"product_detail_setting\": {  // Targeting setting of the Product Detail Placement.\n            \"enabled\": false,  // If set true, the campaign will target the Product Detail Placement.\n            \"cost_price\": {  // A monetary amount in a specific currency; the unit is micro at fixed point value for accurate accumulation operation.\n              \"currency\": \"CURRENCY\",  // Currency enumerates available currencies.\n              \"amount_micro\": \"AMOUNT_MICRO\"  // Amount in micro unit. (e.g., 1234 means 0.001234)\n            }\n          },\n          \"cart_setting\": {  // Targeting setting of the Cart Placement.\n            \"enabled\": false,  // If set true, the campaign will target Cart Placement.\n            \"cost_price\": {  // A monetary amount in a specific currency; the unit is micro at fixed point value for accurate accumulation operation.\n              \"currency\": \"CURRENCY\",  // Currency enumerates available currencies.\n              \"amount_micro\": \"AMOUNT_MICRO\"  // Amount in micro unit. (e.g., 1234 means 0.001234)\n            }\n          },\n          \"checkout_setting\": {  // Targeting setting of the Checkout Placement.\n            \"enabled\": false,  // If set true, the campaign will target the Checkout Placement.\n            \"cost_price\": {  // A monetary amount in a specific currency; the unit is micro at fixed point value for accurate accumulation operation.\n              \"currency\": \"CURRENCY\",  // Currency enumerates available currencies.\n              \"amount_micro\": \"AMOUNT_MICRO\"  // Amount in micro unit. (e.g., 1234 means 0.001234)\n            }\n          },\n          \"ranking_setting\": {  // Targeting setting of the Ranking Placement.\n            \"enabled\": false,  // If set true, the campaign will target the Ranking Placement.\n            \"cost_price\": {  // A monetary amount in a specific currency; the unit is micro at fixed point value for accurate accumulation operation.\n              \"currency\": \"CURRENCY\",  // Currency enumerates available currencies.\n              \"amount_micro\": \"AMOUNT_MICRO\"  // Amount in micro unit. (e.g., 1234 means 0.001234)\n            }\n          }\n        },\n        \"audience_setting\": {  // AudienceSetting describes audience targeting settings for the campaign\n          \"label\": \"LABEL\",  // Label of the audience settings. This can be set only if the event_based_include_list or event_based_exclude_list is set. This label will be used to identify the custom audience settings in the campaign.\n          \"event_based_include_list\": {  // EventBasedList describes event based audience targeting settings for the campaign\n            \"conditions\": [  // Event based audience targeting conditions.\n              {}  // Condition describes event based audience targeting condition for the campaign\n            ],\n            \"operator\": \"OPERATOR\"\n          },\n          \"event_based_exclude_list\": {  // EventBasedList describes event based audience targeting settings for the campaign\n            \"conditions\": [  // Event based audience targeting conditions.\n              {}  // Condition describes event based audience targeting condition for the campaign\n            ],\n            \"operator\": \"OPERATOR\"\n          },\n          \"included_predefined_audience_list\": {  // PredefinedAudienceList describes predefined audiences used for the campaign.\n            \"audiences\": [  // Predefined audiences.\n              {}  // PredefinedAudience describes predefined audience used for the campaign.\n            ],\n            \"operator\": \"OPERATOR\"\n          }\n        }\n      }\n    }\n  ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ReadOrder",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{mgmt_url}}/rmp/mgmt/v1/platforms/{{platform_id}}/ad-accounts/:ad_account_id/orders/:order_id",
+							"host": [
+								"{{mgmt_url}}"
+							],
+							"path": [
+								"rmp",
+								"mgmt",
+								"v1",
+								"platforms",
+								"{{platform_id}}",
+								"ad-accounts",
+								":ad_account_id",
+								"orders",
+								":order_id"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "QueryLineItemDailySummary",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{mgmt_url}}/rmp/mgmt/v1/platforms/{{platform_id}}/ad-accounts/:ad_account_id/orders/:order_id/line-items/:line_item_id/daily-report",
+							"host": [
+								"{{mgmt_url}}"
+							],
+							"path": [
+								"rmp",
+								"mgmt",
+								"v1",
+								"platforms",
+								"{{platform_id}}",
+								"ad-accounts",
+								":ad_account_id",
+								"orders",
+								":order_id",
+								"line-items",
+								":line_item_id",
+								"daily-report"
+							]
+						},
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"date_range\": {\n    \"date_start\": \"DATE_START\",  // Date in 'YYYY-MM-DD' when summary begins. Inclusive. Note the allowed maximum duration for the date range is 186 days, to cover the period of any entire month.\n    \"date_end\": \"DATE_END\"  // Date in 'YYYY-MM-DD' when summary ends. Inclusive. Note the allowed maximum duration for the date range is 186 days, to cover the period of any entire month.\n  }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ListReservedDisplayInventories",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{mgmt_url}}/rmp/mgmt/v1/platforms/{{platform_id}}/reserved-display-inventories",
+							"host": [
+								"{{mgmt_url}}"
+							],
+							"path": [
+								"rmp",
+								"mgmt",
+								"v1",
+								"platforms",
+								"{{platform_id}}",
+								"reserved-display-inventories"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "QueryReservedInventoryForecast",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{mgmt_url}}/rmp/mgmt/v1/platforms/{{platform_id}}/reserved-display-inventories/:inventory_id/forecast",
+							"host": [
+								"{{mgmt_url}}"
+							],
+							"path": [
+								"rmp",
+								"mgmt",
+								"v1",
+								"platforms",
+								"{{platform_id}}",
+								"reserved-display-inventories",
+								":inventory_id",
+								"forecast"
+							]
+						},
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"dayparts\": [  // Optional dayparts specifying the days and hours for forecasting. If omitted, forecast covers all hours of each day in the time interval.\n    {  // Timeframe of a specific day of the week.\n      \"day_of_week\": \"DAY_OF_WEEK\",  // DayOfWeek represents the day of the week.\n      \"start_time\": {  // Specific time of the day.\n        \"hours\": 0  // Hours of day in 24 hour format. Should be from 0 to 24. An API may choose\n      },\n      \"end_time\": {  // Specific time of the day.\n        \"hours\": 0  // Hours of day in 24 hour format. Should be from 0 to 24. An API may choose\n      }\n    }\n  ],\n  \"time_interval\": {  // Campaign's interval with start and end timestamps in RFC3339 format.\n    \"start\": \"START\",  // Start time in RFC3339 format, e.g. '2017-04-01T12:34:56+00:00'\n    \"end\": \"END\"  // End time in RFC3339 format, e.g. '2017-05-01-T21:09:08+00:00'\n  },\n  \"custom_setting\": {  // CustomSetting describes target custom targeting settings for the campaign\n    \"custom_targets\": [  // Custom targets.\n      {  // CustomTarget describes target custom targeting for the campaign\n        \"key_id\": \"KEY_ID\",  // The id of the custom target key.\n        \"value_ids\": [  // The ids of the custom target values.\n          \"VALUE_ID\"\n        ]\n      }\n    ]\n  }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "CustomTargeting",
+			"item": [
+				{
+					"name": "QueryCustomTargetKeys",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{mgmt_url}}/rmp/mgmt/v1/platforms/{{platform_id}}/custom-target-keys",
+							"host": [
+								"{{mgmt_url}}"
+							],
+							"path": [
+								"rmp",
+								"mgmt",
+								"v1",
+								"platforms",
+								"{{platform_id}}",
+								"custom-target-keys"
+							]
+						},
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"cursor\": \"CURSOR\",  // Cursor for pagination. Required after the first request.\n  \"limit\": 0,  // Number of items to be returned. Default: 15, Maximum value: 50\n  \"ad_type\": \"AD_TYPE\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "QueryCustomTargetValues",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{mgmt_url}}/rmp/mgmt/v1/platforms/{{platform_id}}/custom-target-keys/:custom_target_key_id/custom-target-values",
+							"host": [
+								"{{mgmt_url}}"
+							],
+							"path": [
+								"rmp",
+								"mgmt",
+								"v1",
+								"platforms",
+								"{{platform_id}}",
+								"custom-target-keys",
+								":custom_target_key_id",
+								"custom-target-values"
+							]
+						},
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"search\": \"SEARCH\",  // Search keyword to filter custom target values by label. If provided, only values whose labels contain this keyword will be returned.\n  \"cursor\": \"CURSOR\",  // Cursor for pagination. Required after the first request.\n  \"limit\": 0  // Number of items to be returned. Default: 15, Maximum value: 200\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "DataExport",
+			"item": [
+				{
+					"name": "RotateDataExportKey",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{mgmt_url}}/rmp/mgmt/v1/platforms/{{platform_id}}/data-export/key",
+							"host": [
+								"{{mgmt_url}}"
+							],
+							"path": [
+								"rmp",
+								"mgmt",
+								"v1",
+								"platforms",
+								"{{platform_id}}",
+								"data-export",
+								"key"
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		}
 	],
 	"auth": {
