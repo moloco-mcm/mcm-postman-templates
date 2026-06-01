@@ -34,6 +34,9 @@ jobs:
         with:
           python-version: '3.12'
 
+      - name: Install Python dependencies
+        run: pip install anthropic
+
       - name: Update Postman collections from latest API specs
         id: update
         env:
@@ -47,37 +50,35 @@ jobs:
             echo "LOG_EOF"
           } >> $GITHUB_OUTPUT
 
+      - name: Generate PR summary from diff
+        id: summary
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        working-directory: collections-repo
+        run: |
+          {
+            echo "body<<BODY_EOF"
+            git diff | python ${{ github.workspace }}/tools-repo/generate_pr_summary.py ${{ inputs.test && '--test' || '' }}
+            echo ""
+            echo "<details>"
+            echo "<summary>Update Log</summary>"
+            echo ""
+            echo '```'
+            echo "${{ steps.update.outputs.log }}"
+            echo '```'
+            echo "</details>"
+            echo "BODY_EOF"
+          } >> $GITHUB_OUTPUT
+
       - name: Set PR metadata
         id: pr-meta
         run: |
           if [ "${{ inputs.test }}" = "true" ]; then
             echo "branch=test/update-collections" >> $GITHUB_OUTPUT
             echo "title=[TEST] chore: auto-update Postman collections" >> $GITHUB_OUTPUT
-            {
-              echo "body<<BODY_EOF"
-              echo "⚠️ TEST RUN — do not merge"
-              echo ""
-              echo "This PR was created in test mode using local fixtures."
-              echo ""
-              echo "### Update Log"
-              echo '```'
-              echo "${{ steps.update.outputs.log }}"
-              echo '```'
-              echo "BODY_EOF"
-            } >> $GITHUB_OUTPUT
           else
             echo "branch=auto/update-collections" >> $GITHUB_OUTPUT
             echo "title=chore: auto-update Postman collections" >> $GITHUB_OUTPUT
-            {
-              echo "body<<BODY_EOF"
-              echo "Weekly automated update of Postman collection request bodies from the latest OpenAPI specs on README.com."
-              echo ""
-              echo "### Update Log"
-              echo '```'
-              echo "${{ steps.update.outputs.log }}"
-              echo '```'
-              echo "BODY_EOF"
-            } >> $GITHUB_OUTPUT
           fi
 
       - name: Create Pull Request
@@ -90,7 +91,7 @@ jobs:
           branch: ${{ steps.pr-meta.outputs.branch }}
           delete-branch: true
           title: ${{ steps.pr-meta.outputs.title }}
-          body: ${{ steps.pr-meta.outputs.body }}
+          body: ${{ steps.summary.outputs.body }}
 
       - name: Report result
         run: |
