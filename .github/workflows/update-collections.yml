@@ -44,11 +44,6 @@ jobs:
           COLLECTIONS_REPO: ${{ github.workspace }}/collections-repo
         run: |
           python tools-repo/update_collections.py ${{ inputs.test && '--test' || '' }} 2>&1 | tee /tmp/update-output.txt
-          {
-            echo "log<<LOG_EOF"
-            cat /tmp/update-output.txt
-            echo "LOG_EOF"
-          } >> $GITHUB_OUTPUT
 
       - name: Generate PR summary from diff
         id: summary
@@ -56,15 +51,20 @@ jobs:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
         working-directory: collections-repo
         run: |
+          # Never let a summary failure break the PR step: fall back to a plain body.
+          if ! git diff | python ${{ github.workspace }}/tools-repo/generate_pr_summary.py ${{ inputs.test && '--test' || '' }} > /tmp/pr-summary.md; then
+            echo "::warning::PR summary generation failed; using fallback body."
+            printf '%s\n' "Automated sync of Postman collections from the latest OpenAPI specs." "" "_PR summary generation failed; see the update log below._" > /tmp/pr-summary.md
+          fi
           {
             echo "body<<BODY_EOF"
-            git diff | python ${{ github.workspace }}/tools-repo/generate_pr_summary.py ${{ inputs.test && '--test' || '' }}
+            cat /tmp/pr-summary.md
             echo ""
             echo "<details>"
             echo "<summary>Update Log</summary>"
             echo ""
             echo '```'
-            echo "${{ steps.update.outputs.log }}"
+            cat /tmp/update-output.txt
             echo '```'
             echo "</details>"
             echo "BODY_EOF"
