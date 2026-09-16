@@ -53,6 +53,12 @@ jobs:
         continue-on-error: true
         working-directory: tools-repo
         run: |
+          # Verify write access up front so a missing permission is visible on every run.
+          if git push --dry-run origin HEAD:main >/dev/null 2>&1; then
+            echo "TOOLS_REPO_TOKEN has write access to mcm-postman-sync-tool."
+          else
+            echo "::warning::TOOLS_REPO_TOKEN cannot push to mcm-postman-sync-tool. Comment review cache updates will not be persisted."
+          fi
           if git diff --quiet -- comment_overrides.json; then
             echo "comment_overrides.json unchanged."
             exit 0
