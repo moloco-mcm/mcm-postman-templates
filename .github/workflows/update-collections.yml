@@ -41,9 +41,27 @@ jobs:
         id: update
         env:
           README_API_KEY: ${{ secrets.README_API_KEY }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           COLLECTIONS_REPO: ${{ github.workspace }}/collections-repo
         run: |
           python tools-repo/update_collections.py ${{ inputs.test && '--test' || '' }} 2>&1 | tee /tmp/update-output.txt
+
+      # Comment review results are cached in the tools repo so weekly runs stay
+      # deterministic. Push the cache back; a failure here must not block the PR.
+      - name: Persist comment review cache to tools repo
+        if: ${{ !inputs.test }}
+        continue-on-error: true
+        working-directory: tools-repo
+        run: |
+          if git diff --quiet -- comment_overrides.json; then
+            echo "comment_overrides.json unchanged."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add comment_overrides.json
+          git commit -m "chore: update comment review cache from scheduled sync"
+          git push origin HEAD:main || echo "::warning::Could not push comment_overrides.json to mcm-postman-sync-tool (TOOLS_REPO_TOKEN needs write access). Cache changes will be recomputed on the next run."
 
       - name: Generate PR summary from diff
         id: summary
