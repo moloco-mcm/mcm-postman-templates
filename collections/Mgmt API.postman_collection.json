@@ -627,6 +627,12 @@
 								"ad-accounts",
 								":ad_account_id",
 								"item-based-campaign-guidances"
+							],
+							"variable": [
+								{
+									"key": "ad_account_id",
+									"value": "AD_ACCOUNT_ID"
+								}
 							]
 						},
 						"body": {
@@ -1363,6 +1369,16 @@
 								"wallets",
 								":wallet_id",
 								"account-history"
+							],
+							"variable": [
+								{
+									"key": "ad_account_id",
+									"value": "AD_ACCOUNT_ID"
+								},
+								{
+									"key": "wallet_id",
+									"value": "WALLET_ID"
+								}
 							]
 						},
 						"body": {
@@ -1560,7 +1576,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"top_up\": {  // A monetary amount in a specific currency; the unit is micro at fixed point value for accurate accumulation operation.\n    \"currency\": \"CURRENCY\",  // Currency enumerates available currencies.\n    \"amount_micro\": \"AMOUNT_MICRO\"  // Amount in micro unit. (e.g., 1234 means 0.001234)\n  },\n  \"comment\": \"COMMENT\"  // A comment for transaction. Optional.\n}",
+							"raw": "{\n  \"top_up\": {  // A monetary amount in a specific currency; the unit is micro at fixed point value for accurate accumulation operation.\n    \"currency\": \"CURRENCY\",  // Currency enumerates available currencies.\n    \"amount_micro\": \"AMOUNT_MICRO\"  // Amount in micro unit. (e.g., 1234 means 0.001234)\n  },\n  \"comment\": \"COMMENT\"  // A comment for transaction. Optional. Maximum 200 Unicode code points.\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1610,7 +1626,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"withdraw\": {  // A monetary amount in a specific currency; the unit is micro at fixed point value for accurate accumulation operation.\n    \"currency\": \"CURRENCY\",  // Currency enumerates available currencies.\n    \"amount_micro\": \"AMOUNT_MICRO\"  // Amount in micro unit. (e.g., 1234 means 0.001234)\n  },\n  \"comment\": \"COMMENT\"  // A comment for transaction. Optional.\n}",
+							"raw": "{\n  \"withdraw\": {  // A monetary amount in a specific currency; the unit is micro at fixed point value for accurate accumulation operation.\n    \"currency\": \"CURRENCY\",  // Currency enumerates available currencies.\n    \"amount_micro\": \"AMOUNT_MICRO\"  // Amount in micro unit. (e.g., 1234 means 0.001234)\n  },\n  \"comment\": \"COMMENT\"  // A comment for transaction. Optional. Maximum 200 Unicode code points.\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1772,7 +1788,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"top_up\": {\n    \"type\": \"TYPE\",  // AccountType.\n    \"amount\": {  // A monetary amount in a specific currency; the unit is micro at fixed point value for accurate accumulation operation.\n      \"currency\": \"CURRENCY\",  // Currency enumerates available currencies.\n      \"amount_micro\": \"AMOUNT_MICRO\"  // Amount in micro unit. (e.g., 1234 means 0.001234)\n    }\n  },\n  \"comment\": \"COMMENT\"  // A comment for transaction. Optional.\n}",
+							"raw": "{\n  \"top_up\": {\n    \"type\": \"TYPE\",  // AccountType.\n    \"amount\": {  // A monetary amount in a specific currency; the unit is micro at fixed point value for accurate accumulation operation.\n      \"currency\": \"CURRENCY\",  // Currency enumerates available currencies.\n      \"amount_micro\": \"AMOUNT_MICRO\"  // Amount in micro unit. (e.g., 1234 means 0.001234)\n    }\n  },\n  \"comment\": \"COMMENT\"  // A comment for transaction. Optional. Maximum 200 Unicode code points.\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1818,7 +1834,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"withdraw\": {\n    \"type\": \"TYPE\",  // AccountType.\n    \"amount\": {  // A monetary amount in a specific currency; the unit is micro at fixed point value for accurate accumulation operation.\n      \"currency\": \"CURRENCY\",  // Currency enumerates available currencies.\n      \"amount_micro\": \"AMOUNT_MICRO\"  // Amount in micro unit. (e.g., 1234 means 0.001234)\n    }\n  },\n  \"comment\": \"COMMENT\"  // A comment for transaction. Optional.\n}",
+							"raw": "{\n  \"withdraw\": {\n    \"type\": \"TYPE\",  // AccountType.\n    \"amount\": {  // A monetary amount in a specific currency; the unit is micro at fixed point value for accurate accumulation operation.\n      \"currency\": \"CURRENCY\",  // Currency enumerates available currencies.\n      \"amount_micro\": \"AMOUNT_MICRO\"  // Amount in micro unit. (e.g., 1234 means 0.001234)\n    }\n  },\n  \"comment\": \"COMMENT\"  // A comment for transaction. Optional. Maximum 200 Unicode code points.\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -2372,6 +2388,12 @@
 									"key": "ids",
 									"value": null,
 									"disabled": true
+								},
+								{
+									"key": "status",
+									"value": "ALL",
+									"description": "Video asset status.",
+									"disabled": true
 								}
 							],
 							"variable": [
@@ -2578,6 +2600,12 @@
 								"ad-accounts",
 								":ad_account_id",
 								"orders-with-line-items"
+							],
+							"variable": [
+								{
+									"key": "ad_account_id",
+									"value": "AD_ACCOUNT_ID"
+								}
 							]
 						},
 						"body": {
@@ -2618,6 +2646,16 @@
 								":ad_account_id",
 								"orders",
 								":order_id"
+							],
+							"variable": [
+								{
+									"key": "ad_account_id",
+									"value": "AD_ACCOUNT_ID"
+								},
+								{
+									"key": "order_id",
+									"value": "ORDER_ID"
+								}
 							]
 						}
 					},
@@ -2652,6 +2690,20 @@
 								"line-items",
 								":line_item_id",
 								"daily-report"
+							],
+							"variable": [
+								{
+									"key": "ad_account_id",
+									"value": "AD_ACCOUNT_ID"
+								},
+								{
+									"key": "order_id",
+									"value": "ORDER_ID"
+								},
+								{
+									"key": "line_item_id",
+									"value": "LINE_ITEM_ID"
+								}
 							]
 						},
 						"body": {
@@ -2719,6 +2771,12 @@
 								"reserved-display-inventories",
 								":inventory_id",
 								"forecast"
+							],
+							"variable": [
+								{
+									"key": "inventory_id",
+									"value": "INVENTORY_ID"
+								}
 							]
 						},
 						"body": {
@@ -2800,6 +2858,12 @@
 								"custom-target-keys",
 								":custom_target_key_id",
 								"custom-target-values"
+							],
+							"variable": [
+								{
+									"key": "custom_target_key_id",
+									"value": "CUSTOM_TARGET_KEY_ID"
+								}
 							]
 						},
 						"body": {
@@ -2839,6 +2903,12 @@
 								"ad-accounts",
 								":ad_account_id",
 								"custom-target-keys-bulk"
+							],
+							"variable": [
+								{
+									"key": "ad_account_id",
+									"value": "AD_ACCOUNT_ID"
+								}
 							]
 						},
 						"body": {
@@ -2880,6 +2950,16 @@
 								"custom-target-keys",
 								":custom_target_key_id",
 								"custom-target-values-bulk"
+							],
+							"variable": [
+								{
+									"key": "ad_account_id",
+									"value": "AD_ACCOUNT_ID"
+								},
+								{
+									"key": "custom_target_key_id",
+									"value": "CUSTOM_TARGET_KEY_ID"
+								}
 							]
 						},
 						"body": {
@@ -2923,6 +3003,20 @@
 								"line-items",
 								":line_item_id",
 								"custom-daily-report"
+							],
+							"variable": [
+								{
+									"key": "ad_account_id",
+									"value": "AD_ACCOUNT_ID"
+								},
+								{
+									"key": "order_id",
+									"value": "ORDER_ID"
+								},
+								{
+									"key": "line_item_id",
+									"value": "LINE_ITEM_ID"
+								}
 							]
 						}
 					},
@@ -2957,6 +3051,20 @@
 								"line-items",
 								":line_item_id",
 								"custom-target-keys-with-custom-report-bulk"
+							],
+							"variable": [
+								{
+									"key": "ad_account_id",
+									"value": "AD_ACCOUNT_ID"
+								},
+								{
+									"key": "order_id",
+									"value": "ORDER_ID"
+								},
+								{
+									"key": "line_item_id",
+									"value": "LINE_ITEM_ID"
+								}
 							]
 						}
 					},
@@ -3026,6 +3134,20 @@
 								"ad-accounts",
 								":ad_account_id",
 								"spend-caps"
+							],
+							"query": [
+								{
+									"key": "filter.status",
+									"value": "UNKNOWN_SPEND_CAP_STATUS",
+									"description": "Filter by spend cap status.",
+									"disabled": true
+								}
+							],
+							"variable": [
+								{
+									"key": "ad_account_id",
+									"value": "AD_ACCOUNT_ID"
+								}
 							]
 						}
 					},
@@ -3056,6 +3178,12 @@
 								"ad-accounts",
 								":ad_account_id",
 								"spend-caps"
+							],
+							"variable": [
+								{
+									"key": "ad_account_id",
+									"value": "AD_ACCOUNT_ID"
+								}
 							]
 						},
 						"body": {
@@ -3096,6 +3224,16 @@
 								":ad_account_id",
 								"spend-caps",
 								":spend_cap_id"
+							],
+							"variable": [
+								{
+									"key": "ad_account_id",
+									"value": "AD_ACCOUNT_ID"
+								},
+								{
+									"key": "spend_cap_id",
+									"value": "SPEND_CAP_ID"
+								}
 							]
 						}
 					},
@@ -3127,6 +3265,16 @@
 								":ad_account_id",
 								"spend-caps",
 								":spend_cap_id"
+							],
+							"variable": [
+								{
+									"key": "ad_account_id",
+									"value": "AD_ACCOUNT_ID"
+								},
+								{
+									"key": "spend_cap_id",
+									"value": "SPEND_CAP_ID"
+								}
 							]
 						},
 						"body": {
@@ -3168,11 +3316,21 @@
 								"spend-caps",
 								":spend_cap_id",
 								"campaign-assignments"
+							],
+							"variable": [
+								{
+									"key": "ad_account_id",
+									"value": "AD_ACCOUNT_ID"
+								},
+								{
+									"key": "spend_cap_id",
+									"value": "SPEND_CAP_ID"
+								}
 							]
 						},
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"effective_at\": \"EFFECTIVE_AT\",  // Timestamp at which assignment records are queried. Defaults to the server current time when omitted.\n  \"cursor\": \"CURSOR\",  // Cursor for pagination. Required after the first request.\n  \"limit\": 0  // Number of assignment records to be returned. Maximum value: 50\n}",
+							"raw": "{\n  \"effective_at\": \"EFFECTIVE_AT\",  // Point in time to look up. Returns the assignments that were active at this time. Ignored when `effective_from` is also set and is not later than `effective_at`.\n  \"cursor\": \"CURSOR\",  // Cursor for pagination. Required after the first request.\n  \"limit\": 0,  // Number of assignment records to be returned. Maximum value: 50\n  \"effective_from\": \"EFFECTIVE_FROM\"  // Returns every assignment active on or after this point in time, including assignments scheduled for the future. If neither `effective_at` nor `effective_from` is set, defaults to 00:00 today in the platform's time zone.\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -3209,11 +3367,21 @@
 								"spend-caps",
 								":spend_cap_id",
 								"campaign-assignments"
+							],
+							"variable": [
+								{
+									"key": "ad_account_id",
+									"value": "AD_ACCOUNT_ID"
+								},
+								{
+									"key": "spend_cap_id",
+									"value": "SPEND_CAP_ID"
+								}
 							]
 						},
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"campaign_ids\": [  // Desired manually selected campaign ids.\n    \"CAMPAIGN_ID\"\n  ],\n  \"effective_from\": \"EFFECTIVE_FROM\"  // Timestamp from which the assignment update becomes effective. If omitted, the server uses the current time.\n}",
+							"raw": "{\n  \"campaign_ids\": [  // Desired manually selected campaign ids.\n    \"CAMPAIGN_ID\"\n  ],\n  \"effective_from\": \"EFFECTIVE_FROM\"  // Date from which the change takes effect. Any time of day is accepted and is treated as 00:00 of that day in the platform's time zone. For example, on a platform in Asia/Seoul, `2026-10-01T15:30:00+09:00` is applied as `2026-10-01T00:00:00+09:00`. Must not be earlier than today. If omitted, the change takes effect from 00:00 today.\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -3253,6 +3421,12 @@
 								"ad-accounts",
 								":ad_account_id",
 								"campaign-recommendations"
+							],
+							"variable": [
+								{
+									"key": "ad_account_id",
+									"value": "AD_ACCOUNT_ID"
+								}
 							]
 						}
 					},
@@ -3290,6 +3464,16 @@
 								"campaigns",
 								":campaign_id",
 								"spend-cap-assignments"
+							],
+							"variable": [
+								{
+									"key": "ad_account_id",
+									"value": "AD_ACCOUNT_ID"
+								},
+								{
+									"key": "campaign_id",
+									"value": "CAMPAIGN_ID"
+								}
 							]
 						},
 						"body": {
@@ -3332,6 +3516,88 @@
 								"platforms",
 								"{{platform_id}}",
 								"inventories-external"
+							],
+							"query": [
+								{
+									"key": "ad_types",
+									"value": null,
+									"description": "Filter: inventory ad types (OR-composed). If empty, returns ITEM, BRAND, and DISPLAY.",
+									"disabled": true
+								},
+								{
+									"key": "placement_id",
+									"value": null,
+									"description": "Filter: if set, return only inventories under this placement.",
+									"disabled": true
+								},
+								{
+									"key": "cursor",
+									"value": null,
+									"description": "Cursor for pagination. Required after the first request.",
+									"disabled": true
+								},
+								{
+									"key": "limit",
+									"value": "15",
+									"description": "Number of inventories to return. Default: 15, Maximum: 50",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ListAdAccountExternalInventories",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{mgmt_url}}/rmp/mgmt/v1/platforms/{{platform_id}}/ad-accounts/:ad_account_id/inventories-external",
+							"host": [
+								"{{mgmt_url}}"
+							],
+							"path": [
+								"rmp",
+								"mgmt",
+								"v1",
+								"platforms",
+								"{{platform_id}}",
+								"ad-accounts",
+								":ad_account_id",
+								"inventories-external"
+							],
+							"query": [
+								{
+									"key": "ad_types",
+									"value": null,
+									"description": "Filter: inventory ad types (OR-composed). If empty, returns ITEM, BRAND, and DISPLAY.",
+									"disabled": true
+								},
+								{
+									"key": "placement_id",
+									"value": null,
+									"description": "Filter: if set, return only inventories under this placement.",
+									"disabled": true
+								},
+								{
+									"key": "cursor",
+									"value": null,
+									"description": "Cursor for pagination. Required after the first request.",
+									"disabled": true
+								},
+								{
+									"key": "limit",
+									"value": "15",
+									"description": "Number of inventories to return. Default: 15, Maximum: 50",
+									"disabled": true
+								}
+							],
+							"variable": [
+								{
+									"key": "ad_account_id",
+									"value": "AD_ACCOUNT_ID"
+								}
 							]
 						}
 					},
